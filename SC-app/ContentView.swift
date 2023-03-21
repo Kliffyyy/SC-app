@@ -12,10 +12,11 @@ struct ContentView: View {
     @State var showingPopover = false
     
     var body: some View {
-        List{
-            
-        } .toolbar() {
-            ToolbarItem(placement: .primaryAction) {
+        
+        NavigationView{
+                SideBarView(councillor: Councillor.names())
+        } .toolbar {
+            ToolbarItem(placement: .automatic) {
                 Button{
                     showingPopover = true
                 } label: {
@@ -31,13 +32,34 @@ struct ContentView: View {
                             .offset(y: 1)
                     }
                 }
-                .popover(isPresented: $showingPopover) {
+                .popover(isPresented: $showingPopover, attachmentAnchor: .rect(.bounds), arrowEdge: .bottom) {
                     Text("Your content here")
                         .font(.headline)
                         .padding()
                 }
             }
+            
+            ToolbarItem(placement: .navigation){
+                Button{
+                    toggleSidebar()
+                } label: {
+                    Image(systemName: "sidebar.left")
+                }
+            }
+//            ToolbarItemGroup(placement: .automatic){
+//                Image(systemName: "sidebar.left")
+//                Menu{
+//                    Image(systemName: "gear")
+//                    Image(systemName: "gear.1")
+//                } label: {
+//                    Image(systemName: "square.and.arrow.up")
+//                }
+//            }
         }
+    }
+    
+    private func toggleSidebar() {
+        NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
     }
 }
 

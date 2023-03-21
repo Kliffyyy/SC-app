@@ -14,6 +14,9 @@
 		07110BDA29C98CA300C405C0 /* SC_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07110BD929C98CA300C405C0 /* SC_appTests.swift */; };
 		07110BE429C98CA300C405C0 /* SC_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07110BE329C98CA300C405C0 /* SC_appUITests.swift */; };
 		07110BE629C98CA300C405C0 /* SC_appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07110BE529C98CA300C405C0 /* SC_appUITestsLaunchTests.swift */; };
+		07110BF329C9C2C700C405C0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07110BF229C9C2C700C405C0 /* Data.swift */; };
+		07110BF529C9C63C00C405C0 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07110BF429C9C63C00C405C0 /* SideBarView.swift */; };
+		07110BF729C9C73D00C405C0 /* CouncillorDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07110BF629C9C73D00C405C0 /* CouncillorDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,9 @@
 		07110BDF29C98CA300C405C0 /* SC-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SC-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07110BE329C98CA300C405C0 /* SC_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SC_appUITests.swift; sourceTree = "<group>"; };
 		07110BE529C98CA300C405C0 /* SC_appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SC_appUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		07110BF229C9C2C700C405C0 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		07110BF429C9C63C00C405C0 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
+		07110BF629C9C73D00C405C0 /* CouncillorDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouncillorDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,9 @@
 			children = (
 				07110BC729C98CA100C405C0 /* SC_appApp.swift */,
 				07110BC929C98CA100C405C0 /* ContentView.swift */,
+				07110BF429C9C63C00C405C0 /* SideBarView.swift */,
+				07110BF629C9C73D00C405C0 /* CouncillorDetailView.swift */,
+				07110BF229C9C2C700C405C0 /* Data.swift */,
 				07110BCB29C98CA300C405C0 /* Assets.xcassets */,
 				07110BD029C98CA300C405C0 /* SC_app.entitlements */,
 				07110BCD29C98CA300C405C0 /* Preview Content */,
@@ -260,6 +269,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				07110BCA29C98CA100C405C0 /* ContentView.swift in Sources */,
+				07110BF529C9C63C00C405C0 /* SideBarView.swift in Sources */,
+				07110BF329C9C2C700C405C0 /* Data.swift in Sources */,
+				07110BF729C9C73D00C405C0 /* CouncillorDetailView.swift in Sources */,
 				07110BC829C98CA100C405C0 /* SC_appApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
