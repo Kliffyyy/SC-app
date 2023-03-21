@@ -20,27 +20,28 @@ struct CouncillorDetailView: View {
                 HStack{
                     Text("Subcomm:   ")
                     Spacer()
-                    Text(" \(councillor.Subcomm.rawValue) ")
+                    Text(" \(councillor.subcomm.rawValue) ")
                         .padding(5)
-                        .font(.footnote)
-                        .background(.blue)
+                        .font(.headline)
+                        .background(Color.blue)
                         .cornerRadius(7)
                 }.frame(width: 300)
                 
                 HStack(alignment: .center){
                     Text("Class:   ")
                     Spacer()
-                    Text(" \(councillor.Class) ")
+                    Text(" \(councillor.formClass) ")
                         .padding(5)
-                        .font(.footnote)
+                        .font(.headline)
                         .background(.blue)
                         .cornerRadius(7)
                 }.frame(width: 300)
                 
-                if councillor.ExCo == true {
+                if councillor.exco == true {
                     Text("This person is a member of the Student Council ExCo")
                         .font(.footnote)
                         .underline()
+                        .italic()
                 }
                 
                 Spacer()
