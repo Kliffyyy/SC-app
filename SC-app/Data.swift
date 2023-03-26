@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum Subcomm: String {
+enum Subcomm: String, Codable, CaseIterable {
     case Discipline = "Discipline"
     case StudentEngagement = "Student Engagement"
     case Training = "Training"
@@ -29,7 +29,7 @@ extension Subcomm {
     }
 }
 
-struct Councillor: Identifiable {
+struct Councillor: Identifiable, Codable {
     var id = UUID()
     
     var name: String
@@ -47,35 +47,37 @@ struct Councillor: Identifiable {
     }
 }
 
-extension Councillor {
-    
-    static func names() -> [Councillor] {
-        return [.init(name: "Klifton", formClass: "S30X", subcomm: .Discipline),
-                .init(name: "Luke", formClass: "S30X", subcomm: .Discipline),
-                .init(name: "Natalie", formClass: "S30X", subcomm: .StudentEngagement, exco: true),
-                .init(name: "Neha", formClass: "S30X", subcomm: .Communications, exco: true),
-                .init(name: "Nicole", formClass: "S30X", subcomm: .Training)]
-    }
-}
+//extension Councillor {
+//
+//    static func names() -> [Councillor] {
+//        return [.init(name: "Klifton", formClass: "S30X", subcomm: .Discipline),
+//                .init(name: "Luke", formClass: "S30X", subcomm: .Discipline),
+//                .init(name: "Natalie", formClass: "S30X", subcomm: .StudentEngagement, exco: true),
+//                .init(name: "Neha", formClass: "S30X", subcomm: .Communications, exco: true),
+//                .init(name: "Nicole", formClass: "S30X", subcomm: .Training)]
+//    }
+//}
 
-enum tagColor: Color. {
-    
-    case Discipline = red
-    case StudentEngagement = orange
-    case Training = cyan
-    case Communications = blue
-    case None = white
-}
 
-extension tagColor {
-    
-    var value: String {
-        switch self {
-        case .Discipline: return .red
-        case .StudentEngagement: return .orange
-        case .Training: return .cyan
-        case .Communications: return .blue
-        case .None: return .white
-        }
-    }
-}
+
+
+//class tagColor: Identifiable {
+//    var Discipline = red
+//    var StudentEngagement = orange
+//    var Training = cyan
+//    var Communications = blue
+//    var None = white
+//}
+//
+//extension tagColor {
+//    
+//    var value: String {
+//        switch self {
+//        case .Discipline: return .red
+//        case .StudentEngagement: return .orange
+//        case .Training: return .cyan
+//        case .Communications: return .blue
+//        case .None: return .white
+//        }
+//    }
+//}

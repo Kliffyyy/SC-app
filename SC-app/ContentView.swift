@@ -10,12 +10,15 @@ import SwiftUI
 struct ContentView: View {
     
     @State var showingPopover = false
+    @StateObject var councillorManager = CouncillorManager()
+    @State var subcomm: Subcomm
     
     var body: some View {
         
         NavigationView{
-                SideBarView(councillor: Councillor.names())
-        } .toolbar {
+            SideBarView(councillor: councillorManager.councillors, subcomm: subcomm)
+        }
+        .toolbar {
             ToolbarItem(placement: .automatic) {
                 Button{
                     showingPopover = true
@@ -65,6 +68,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(subcomm: .None)
     }
 }

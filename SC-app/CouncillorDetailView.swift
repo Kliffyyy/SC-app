@@ -10,6 +10,7 @@ import SwiftUI
 struct CouncillorDetailView: View {
     
     let councillor: Councillor
+//    @StateObject var councillorManager = CouncillorManager()
     
     var body: some View {
         HStack{
@@ -53,6 +54,6 @@ struct CouncillorDetailView: View {
 
 struct CouncillorDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CouncillorDetailView(councillor: Councillor.names()[1])
+        CouncillorDetailView(councillor: CouncillorManager().councillors[1])
     }
 }

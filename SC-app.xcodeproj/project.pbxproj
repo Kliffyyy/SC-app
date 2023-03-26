@@ -17,6 +17,7 @@
 		07110BF329C9C2C700C405C0 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07110BF229C9C2C700C405C0 /* Data.swift */; };
 		07110BF529C9C63C00C405C0 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07110BF429C9C63C00C405C0 /* SideBarView.swift */; };
 		07110BF729C9C73D00C405C0 /* CouncillorDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07110BF629C9C73D00C405C0 /* CouncillorDetailView.swift */; };
+		07897A2729CF1F90009A9771 /* PersistenceFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07897A2629CF1F90009A9771 /* PersistenceFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		07110BF229C9C2C700C405C0 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		07110BF429C9C63C00C405C0 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		07110BF629C9C73D00C405C0 /* CouncillorDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouncillorDetailView.swift; sourceTree = "<group>"; };
+		07897A2629CF1F90009A9771 /* PersistenceFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				07110BC729C98CA100C405C0 /* SC_appApp.swift */,
 				07110BC929C98CA100C405C0 /* ContentView.swift */,
+				07897A2629CF1F90009A9771 /* PersistenceFunctions.swift */,
 				07110BF429C9C63C00C405C0 /* SideBarView.swift */,
 				07110BF629C9C73D00C405C0 /* CouncillorDetailView.swift */,
 				07110BF229C9C2C700C405C0 /* Data.swift */,
@@ -273,6 +276,7 @@
 				07110BF329C9C2C700C405C0 /* Data.swift in Sources */,
 				07110BF729C9C73D00C405C0 /* CouncillorDetailView.swift in Sources */,
 				07110BC829C98CA100C405C0 /* SC_appApp.swift in Sources */,
+				07897A2729CF1F90009A9771 /* PersistenceFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
