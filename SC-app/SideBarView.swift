@@ -9,23 +9,49 @@ import SwiftUI
 
 struct SideBarView: View {
     
-    let councillor: [Councillor]
-    
-//    @State var item: Subcomm! = .None
     @State private var showSheet = false
     @State private var textInputName = ""
     @State private var textInputClass = ""
-    
     @State var subcomm: Subcomm
     
     @ObservedObject var councillorManager: CouncillorManager = .shared
     
     var body: some View {
         List{
-            ForEach(councillor) { i in
+            ForEach(councillorManager.councillors) { i in
                 NavigationLink(destination: CouncillorDetailView(councillor: i), label: {
-                    Text(i.name)
+                    HStack{
+                        VStack(alignment: .leading){
+                            Text(i.name)
+                                .lineLimit(1)
+                                .padding(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+                        }
+                    }
                 })
+
+            }
+            .onDeleteCommand {
+                councillorManager.councillors.remove(at: <#T##Int#>)
+            }
+            .contextMenu {
+                Button{
+                    print("button clicked")
+                } label: {
+                    Text("Edit")
+                        .foregroundColor(Color.primary)
+                        .opacity(0.8)
+                }
+                .buttonStyle(.plain)
+                
+                Button{
+                    councillorManager.councillors.remove(at: <#T##Int#>)
+                } label: {
+                    Text("Delete Councillor")
+                        .foregroundColor(Color.primary)
+                        .opacity(0.8)
+                }
+                .buttonStyle(.plain)
+                .keyboardShortcut(.delete, modifiers: [.command])
             }
         }
         .overlay{
@@ -100,8 +126,9 @@ struct SheetView: View {
 }
 
 //struct SideBarView_Previews: PreviewProvider {
-//    @Binding var subcomm: Subcomm
+//    @ObservedObject var councillorManager: CouncillorManager = .shared
+//    @State var subcomm: Subcomm
 //    static var previews: some View {
-//        SideBarView(councillor: CouncillorManager().councillors, subcomm: $subcomm)
+//        SideBarView(councillor: councillorManager.councillors, subcomm: subcomm)
 //    }
 //}
