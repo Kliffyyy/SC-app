@@ -54,6 +54,6 @@ struct CouncillorDetailView: View {
 
 struct CouncillorDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CouncillorDetailView(councillor: CouncillorManager().councillors[1])
+        CouncillorDetailView(councillor: CouncillorManager.shared.councillors[1])
     }
 }

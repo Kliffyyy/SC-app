@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State var showingPopover = false
-    @StateObject var councillorManager = CouncillorManager()
+    @ObservedObject var councillorManager: CouncillorManager = .shared
     @State var subcomm: Subcomm
     
     var body: some View {

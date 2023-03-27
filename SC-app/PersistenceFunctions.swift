@@ -9,13 +9,15 @@ import Foundation
 import SwiftUI
 
 class CouncillorManager: ObservableObject {
+    static let shared: CouncillorManager = .init() 
+    
     @Published var councillors: [Councillor] = [] {
         didSet {
             save()
         }
     }
         
-    init() {
+    private init() {
         load()
     }
     

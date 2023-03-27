@@ -18,7 +18,7 @@ struct SideBarView: View {
     
     @State var subcomm: Subcomm
     
-    @StateObject var councillorManager = CouncillorManager()
+    @ObservedObject var councillorManager: CouncillorManager = .shared
     
     var body: some View {
         List{
@@ -64,7 +64,7 @@ struct SheetView: View {
     @Binding var councillorClass: String
     @Binding var subcomm: Subcomm
     
-    @StateObject var councillorManager = CouncillorManager()
+    @ObservedObject var councillorManager: CouncillorManager = .shared
     
     var body: some View {
         VStack(alignment: .leading){
