@@ -16,7 +16,7 @@ struct ContentView: View {
     var body: some View {
         
         NavigationView{
-            SideBarView(councillor: councillorManager.councillors, subcomm: subcomm)
+            SideBarView(subcomm: subcomm)
         }
         .toolbar {
             ToolbarItem(placement: .automatic) {

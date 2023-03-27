@@ -31,7 +31,7 @@ struct SideBarView: View {
 
             }
             .onDeleteCommand {
-                councillorManager.councillors.remove(at: <#T##Int#>)
+//                councillorManager.councillors.remove(at: <#T##Int#>)
             }
             .contextMenu {
                 Button{
@@ -44,7 +44,7 @@ struct SideBarView: View {
                 .buttonStyle(.plain)
                 
                 Button{
-                    councillorManager.councillors.remove(at: <#T##Int#>)
+//                    councillorManager.councillors.remove(at: <#T##Int#>)
                 } label: {
                     Text("Delete Councillor")
                         .foregroundColor(Color.primary)
