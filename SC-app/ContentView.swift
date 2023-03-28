@@ -17,47 +17,37 @@ struct ContentView: View {
         
         NavigationView{
             SideBarView(subcomm: subcomm)
-        }
-        .toolbar {
-            ToolbarItem(placement: .automatic) {
-                Button{
-                    showingPopover = true
-                } label: {
-                    HStack{
-//                        Image(systemName: "macwindow.on.rectangle")
-                        Text("Window")
-                            .font(.headline)
-                            .padding(.trailing, 10)
-                        Image(systemName: "chevron.down")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 10)
-                            .offset(y: 1)
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction){
+                        Button{
+                            toggleSidebar()
+                        } label: {
+                            Image(systemName: "sidebar.left")
+                        }
+                    }
+                    ToolbarItem(placement: .automatic) {
+                        Button{
+                            showingPopover = true
+                        } label: {
+                            HStack{
+        //                        Image(systemName: "macwindow.on.rectangle")
+                                Text("Window")
+                                    .font(.headline)
+                                    .padding(.trailing, 10)
+                                Image(systemName: "chevron.down")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 10)
+                                    .offset(y: 1)
+                            }
+                        }
+                        .popover(isPresented: $showingPopover, attachmentAnchor: .rect(.bounds), arrowEdge: .bottom) {
+                            Text("Your content here")
+                                .font(.headline)
+                                .padding()
+                        }
                     }
                 }
-                .popover(isPresented: $showingPopover, attachmentAnchor: .rect(.bounds), arrowEdge: .bottom) {
-                    Text("Your content here")
-                        .font(.headline)
-                        .padding()
-                }
-            }
-            
-            ToolbarItem(placement: .navigation){
-                Button{
-                    toggleSidebar()
-                } label: {
-                    Image(systemName: "sidebar.left")
-                }
-            }
-//            ToolbarItemGroup(placement: .automatic){
-//                Image(systemName: "sidebar.left")
-//                Menu{
-//                    Image(systemName: "gear")
-//                    Image(systemName: "gear.1")
-//                } label: {
-//                    Image(systemName: "square.and.arrow.up")
-//                }
-//            }
         }
     }
     

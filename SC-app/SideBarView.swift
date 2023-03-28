@@ -18,67 +18,70 @@ struct SideBarView: View {
     
     var body: some View {
         List{
-            ForEach(councillorManager.councillors) { i in
-                NavigationLink(destination: CouncillorDetailView(councillor: i), label: {
-                    HStack{
-                        VStack(alignment: .leading){
-                            Text(i.name)
-                                .lineLimit(1)
-                                .padding(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+            ForEach(Array(councillorManager.councillors.enumerated()), id: \.1.id) { (index, item) in
+                NavigationLink(destination: CouncillorDetailView(councillor: item), label: {
+                    withAnimation{
+                        HStack{
+                            VStack(alignment: .leading){
+                                Text(item.name)
+                                    .lineLimit(1)
+                                    .padding(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+                            }
                         }
                     }
                 })
-
-            }
-            .onDeleteCommand {
-//                councillorManager.councillors.remove(at: <#T##Int#>)
-            }
-            .contextMenu {
-                Button{
-                    print("button clicked")
-                } label: {
-                    Text("Edit")
-                        .foregroundColor(Color.primary)
-                        .opacity(0.8)
+                .onDeleteCommand {
+                    councillorManager.councillors.remove(at: index)
                 }
-                .buttonStyle(.plain)
-                
-                Button{
-//                    councillorManager.councillors.remove(at: <#T##Int#>)
-                } label: {
-                    Text("Delete Councillor")
-                        .foregroundColor(Color.primary)
-                        .opacity(0.8)
+                .contextMenu {
+                    Button{
+                        print("button clicked")
+                    } label: {
+                        Text("Edit")
+                            .foregroundColor(Color.primary)
+                            .opacity(0.8)
+                    }
+                    .buttonStyle(.plain)
+                    
+                    Button{
+                        councillorManager.councillors.remove(at: index)
+                    } label: {
+                        Text("Delete Councillor")
+                            .foregroundColor(Color.primary)
+                            .opacity(0.8)
+                    }
+                    .buttonStyle(.plain)
+                    .keyboardShortcut(.delete, modifiers: [.command])
                 }
-                .buttonStyle(.plain)
-                .keyboardShortcut(.delete, modifiers: [.command])
             }
         }
-        .overlay{
-            VStack{
-                Spacer()
-                HStack{
-                    Spacer(minLength: 4)
-                    Button{
-                        showSheet.toggle()
+        .scrollContentBackground(.hidden)
+        .safeAreaInset(edge: .bottom) {
+            HStack{
+                Spacer(minLength: 4)
+                Button{
+                    showSheet.toggle()
 //                        councillorManager.councillors.append(Councillor(name: "your new student councillor", formClass: "SX0X", subcomm: .Discipline))
-                        print("this is councillors: \(councillorManager.councillors)")
-                    } label: {
+                    print("this is councillors: \(councillorManager.councillors)")
+                } label: {
+                    HStack{
+                        Spacer()
                         Image(systemName: "plus")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20)
+                        Spacer()
                     }
-                    .sheet(isPresented: $showSheet) {
-                        SheetView(councillorName: $textInputName, councillorClass: $textInputClass, subcomm: $subcomm)
-                    }
-                    
-                    Spacer()
                 }
-                .padding(10)
-                .frame(height: 50)
-                .background(Color(red: 20/255, green: 20/255, blue: 20/255, opacity: 0.8))
+                .buttonStyle(.automatic)
+                .sheet(isPresented: $showSheet) {
+                    SheetView(councillorName: $textInputName, councillorClass: $textInputClass, subcomm: $subcomm)
+                }
+                
+                Spacer()
             }
+            .padding(10)
+            .frame(height: 50)
         }
     }
 }
