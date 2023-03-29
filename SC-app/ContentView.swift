@@ -17,6 +17,7 @@ struct ContentView: View {
         
         NavigationView{
             SideBarView(subcomm: subcomm)
+                .frame(minWidth: 150)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction){
                         Button{
