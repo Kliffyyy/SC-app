@@ -47,37 +47,23 @@ struct Councillor: Identifiable, Codable {
     }
 }
 
-//extension Councillor {
-//
-//    static func names() -> [Councillor] {
-//        return [.init(name: "Klifton", formClass: "S30X", subcomm: .Discipline),
-//                .init(name: "Luke", formClass: "S30X", subcomm: .Discipline),
-//                .init(name: "Natalie", formClass: "S30X", subcomm: .StudentEngagement, exco: true),
-//                .init(name: "Neha", formClass: "S30X", subcomm: .Communications, exco: true),
-//                .init(name: "Nicole", formClass: "S30X", subcomm: .Training)]
-//    }
-//}
+protocol ValidationRule {
+    
+    associatedtype Value: Equatable
+    associatedtype Failure: Error
+    
+    var fallbackValue: Value { get }
+    
+    func validate(_ value: Value) -> Result<Value, Failure>
+}
 
+extension ValidationRule where Value == String {
+    var fallbackValue: Value { .init() } // returns empty String
+}
 
+extension ValidationRule where Value: ExpressibleByNilLiteral {
+    var fallbackValue: Value { .init(nilLiteral: ()) } // returns nil
+}
 
-
-//class tagColor: Identifiable {
-//    var Discipline = red
-//    var StudentEngagement = orange
-//    var Training = cyan
-//    var Communications = blue
-//    var None = white
-//}
-//
-//extension tagColor {
-//    
-//    var value: String {
-//        switch self {
-//        case .Discipline: return .red
-//        case .StudentEngagement: return .orange
-//        case .Training: return .cyan
-//        case .Communications: return .blue
-//        case .None: return .white
-//        }
-//    }
-//}
+typealias ErrorMessage = String
+extension ErrorMessage: Error {}

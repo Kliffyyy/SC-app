@@ -74,7 +74,7 @@ struct SideBarView: View {
             }
             .buttonStyle(.borderless)
             .sheet(isPresented: $showSheet) {
-                SheetView(councillorName: $textInputName, councillorClass: $textInputClass, subcomm: $subcomm)
+                SheetView(councillorName: $textInputName, councillorClass: $textInputClass, subcomm: $subcomm, maxLength: 4)
             }
             .frame(height: 50)
             Spacer()
@@ -82,7 +82,16 @@ struct SideBarView: View {
     }
 }
 
-struct SheetView: View {
+struct SheetView: View, ValidationRule {
+    
+    init(councillorName: Binding<String>, councillorClass: Binding<String>, subcomm: Binding<Subcomm>, maxLength: Int) {
+        self._councillorName = councillorName
+        self._councillorClass = councillorClass
+        self._subcomm = subcomm
+        self.maxLength = maxLength
+        self._dismiss = .init(\.dismiss)
+    }
+    
     @Environment(\.dismiss) var dismiss
     
     @Binding var councillorName: String
@@ -100,14 +109,15 @@ struct SheetView: View {
                 .background(.gray)
                 .cornerRadius(10)
                 .font(.caption)
-            TextField("SX-0X", text: $councillorClass)
+            TextField("SX0X", text: $councillorClass)
                 .padding(5)
                 .background(.gray)
                 .cornerRadius(10)
                 .font(.caption)
             Picker("Subcomm", selection: $subcomm) {
                 ForEach(Subcomm.allCases, id: \.rawValue) { subcomm in
-                    Text(subcomm.rawValue).tag(subcomm)
+                    Text(subcomm.rawValue)
+                        .tag(subcomm)
                 }
             }.pickerStyle(.menu)
             
@@ -126,6 +136,22 @@ struct SheetView: View {
             
         }.padding(10)
     }
+// data validation ----------------------------------------
+    let maxLength: Int
+    
+    func validate(_ value: String) -> Result<String, ErrorMessage> {
+            
+        // value must be less than or equal to max length
+        guard value.count <= self.maxLength else {
+            return .failure("Word may not exceed \(self.maxLength) characters")
+        }
+        // value must be a string
+        guard value.allSatisfy({char in char.isLetter}) else {
+            return .failure("Word may contain only letters")
+        }
+        // successful validation
+            return .success(value)
+        }
 }
 
 //struct SideBarView_Previews: PreviewProvider {
