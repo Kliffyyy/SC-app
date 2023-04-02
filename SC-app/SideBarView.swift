@@ -18,7 +18,10 @@ struct SideBarView: View {
     
     var body: some View {
         VStack{
-            List{
+            List {
+                Text("Councillors")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
                 ForEach(Array(councillorManager.councillors.enumerated()), id: \.1.id) { (index, item) in
                     NavigationLink(destination: CouncillorDetailView(councillor: item), label: {
                         withAnimation{
@@ -31,9 +34,6 @@ struct SideBarView: View {
                             }
                         }
                     })
-//                    .onDeleteCommand {
-//                        councillorManager.councillors.remove(at: index)
-//                    }
                     .contextMenu {
                         Button{
                             print("button clicked")
@@ -52,12 +52,10 @@ struct SideBarView: View {
                                 .opacity(0.8)
                         }
                         .buttonStyle(.plain)
-//                        .keyboardShortcut(.delete, modifiers: [.command])
                     }
                 }
             }
             .scrollContentBackground(.hidden)
-            .padding(.bottom, 20)
             
             Button{
                 showSheet.toggle()
@@ -74,7 +72,7 @@ struct SideBarView: View {
             }
             .buttonStyle(.borderless)
             .sheet(isPresented: $showSheet) {
-                SheetView(councillorName: $textInputName, councillorClass: $textInputClass, subcomm: $subcomm, maxLength: 4)
+                SheetView(councillorName: $textInputName, councillorClass: $textInputClass, subcomm: $subcomm)
             }
             .frame(height: 50)
             Spacer()
@@ -82,16 +80,7 @@ struct SideBarView: View {
     }
 }
 
-struct SheetView: View, ValidationRule {
-    
-    init(councillorName: Binding<String>, councillorClass: Binding<String>, subcomm: Binding<Subcomm>, maxLength: Int) {
-        self._councillorName = councillorName
-        self._councillorClass = councillorClass
-        self._subcomm = subcomm
-        self.maxLength = maxLength
-        self._dismiss = .init(\.dismiss)
-    }
-    
+struct SheetView: View {
     @Environment(\.dismiss) var dismiss
     
     @Binding var councillorName: String
@@ -101,57 +90,50 @@ struct SheetView: View, ValidationRule {
     @ObservedObject var councillorManager: CouncillorManager = .shared
     
     var body: some View {
-        VStack(alignment: .leading){
+        VStack(alignment: .leading) {
             Spacer()
             
             TextField("Councillor Name", text: $councillorName)
-                .padding(5)
-                .background(.gray)
                 .cornerRadius(10)
-                .font(.caption)
-            TextField("SX0X", text: $councillorClass)
-                .padding(5)
-                .background(.gray)
+                .font(.callout)
+                .textFieldStyle(.roundedBorder)
+            ValidatableTextField("SX0X", text: $councillorClass, validation: { !$0.contains("-") })
                 .cornerRadius(10)
-                .font(.caption)
+                .font(.callout)
+                .textFieldStyle(.roundedBorder)
             Picker("Subcomm", selection: $subcomm) {
                 ForEach(Subcomm.allCases, id: \.rawValue) { subcomm in
                     Text(subcomm.rawValue)
                         .tag(subcomm)
                 }
-            }.pickerStyle(.menu)
-            
-            Button("Confirm") {
-                councillorManager.councillors.append(Councillor(name: councillorName, formClass: councillorClass, subcomm: subcomm))
-                councillorName = ""
-                councillorClass = ""
-                subcomm = .None
-                dismiss()
             }
-            .keyboardShortcut(.return)
-            .font(.title)
-            .padding()
-            .background(Color.orange)
-            .cornerRadius(10)
-            
-        }.padding(10)
+            .pickerStyle(.menu)
+            HStack {
+                Button("Confirm") {
+                    councillorManager.councillors.append(Councillor(name: councillorName, formClass: councillorClass, subcomm: subcomm))
+                    councillorName = ""
+                    councillorClass = ""
+                    subcomm = .None
+                    dismiss()
+                }
+                .keyboardShortcut(.return)
+                .font(.caption)
+                .cornerRadius(10)
+                
+                Button("Cancel") {
+                    councillorName = ""
+                    councillorClass = ""
+                    subcomm = .None
+                    dismiss()
+                }
+                .keyboardShortcut(.cancelAction)
+                .font(.caption)
+                .cornerRadius(10)
+            }
+        }
+        .frame(maxWidth: 500)
+        .padding(10)
     }
-// data validation ----------------------------------------
-    let maxLength: Int
-    
-    func validate(_ value: String) -> Result<String, ErrorMessage> {
-            
-        // value must be less than or equal to max length
-        guard value.count <= self.maxLength else {
-            return .failure("Word may not exceed \(self.maxLength) characters")
-        }
-        // value must be a string
-        guard value.allSatisfy({char in char.isLetter}) else {
-            return .failure("Word may contain only letters")
-        }
-        // successful validation
-            return .success(value)
-        }
 }
 
 //struct SideBarView_Previews: PreviewProvider {
