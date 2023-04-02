@@ -11,7 +11,7 @@ struct ContentView: View {
     var controlPoint: Double = 0.0
     @State private var showingPopover = false
     @State private var showToolbar = false
-    @State private var toolbarState = true
+    @State private var sidebarState = true
     @State private var sidebarX: Double = 17
     @ObservedObject var councillorManager: CouncillorManager = .shared
     @State var subcomm: Subcomm
@@ -26,13 +26,15 @@ struct ContentView: View {
                     ToolbarItem(placement: .primaryAction){
                         Button {
                             toggleSidebar()
-                            toolbarState.toggle()
-                            sidebarX += toolbarState ? 14 : -14
+                            sidebarState.toggle()
+                            withAnimation(.easeInOut(duration: 2)) {
+                                sidebarX += sidebarState ? 14 : -14
+                            }
                         } label: {
 //                            Image(systemName: toolbarState ? "sidebar.left" : "sidebar.right")
 //                                .animation(.easeInOut(duration: 0.2), value: toolbarState)
                             
-                            CustomSideBarToggleIcon(controlPoint: controlPoint, toggle: toolbarState, x: sidebarX)
+                            CustomSideBarToggleIcon(controlPoint: controlPoint, toggle: sidebarState, x: sidebarX)
                                 .stroke(.primary, style: StrokeStyle(lineWidth: 1.7, lineCap: .round, lineJoin: .round))
                                 .frame(width: 20, height: 15)
                                 .offset(x: 0, y: 0)
@@ -74,7 +76,7 @@ struct ContentView: View {
     }
     
     private func toggleSidebar() {
-        NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
+            NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
     }
 }
 
@@ -110,14 +112,14 @@ struct CustomSideBarToggleIcon: Shape {
         
         
 //        if toggle {
-//            pencil.move(to: CGPoint(x: rect.maxX - x, y: rect.minY + x))
-//            pencil.addLine(to: CGPoint(x: rect.maxX - x, y: rect.minY + x))
-//            pencil.addLine(to: CGPoint(x: rect.maxX - x, y: rect.maxY - x))
+//            pencil.move(to: CGPoint(x: rect.maxX - x, y: rect.minY + 4))
+//            pencil.addLine(to: CGPoint(x: rect.maxX - x, y: rect.minY + 4))
+//            pencil.addLine(to: CGPoint(x: rect.maxX - x, y: rect.maxY - 4))
 //            pencil.closeSubpath()
 //        } else {
-//            pencil.move(to: CGPoint(x: rect.minX + x, y: rect.minY + x))
-//            pencil.addLine(to: CGPoint(x: rect.minX + x, y: rect.minY + x))
-//            pencil.addLine(to: CGPoint(x: rect.minX + x, y: rect.maxY - x))
+//            pencil.move(to: CGPoint(x: rect.minX + x, y: rect.minY + 4))
+//            pencil.addLine(to: CGPoint(x: rect.minX + x, y: rect.minY + 4))
+//            pencil.addLine(to: CGPoint(x: rect.minX + x, y: rect.maxY - 4))
 //            pencil.closeSubpath()
 //
 //        }
